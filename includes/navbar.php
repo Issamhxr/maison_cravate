@@ -5,8 +5,10 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center" href="/maison_cravate/index.php">
-      <img src="/maison_cravate/assets/img/mm.png" alt="Logo" height="40" class="me-2">
-      <span>Maison de la Cravate</span>
+   <img src="/maison_cravate/assets/img/tiehouse_logo_fullwidth.png" alt="TieHouse" height="50"  style="object-fit: contain;">
+
+
+    
     </a>
     <button 
       class="navbar-toggler" 
