@@ -16,12 +16,12 @@ $userId = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
 // Handle POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $name = trim($_POST['name']);
-  $email = trim($_POST['email']);
+  $phone = trim($_POST['phone']);
   $address = trim($_POST['address']);
   $wilaya = trim($_POST['wilaya']);
 
   // Validate inputs (add more validation as needed)
-  if (empty($name) || empty($email) || empty($address) || empty($wilaya)) {
+  if (empty($name) || empty($phone) || empty($address) || empty($wilaya)) {
     $error = "Please fill in all required fields.";
   } else {
     try {
@@ -41,8 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       // Debugging: Output the value of $userIdForOrder
       echo "User ID for Order: " . $userIdForOrder . "<br>";
 
-      $stmt = $pdo->prepare('INSERT INTO orders (user_id, name, email, address, wilaya, total, created_at, status) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?)');
-      $stmt->execute([$userIdForOrder, $name, $email, $address, $wilaya, $total, 'pending']);
+      $stmt = $pdo->prepare('INSERT INTO orders (user_id, name, phone, address, wilaya, total, created_at, status) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?)');
+      $stmt->execute([$userIdForOrder, $name, $phone, $address, $wilaya, $total, 'pending']);
       $orderId = $pdo->lastInsertId();
 
       // Insert order items
@@ -73,24 +73,30 @@ include __DIR__ . '/../includes/header.php';
     <h2 class="checkout-title">Guest Checkout</h2>
     <p class="checkout-desc">Please fill in your details to complete your order. No account required.</p>
     <?php if (isset($error)): ?>
-      <div class="alert alert-danger"><?= $error ?></div>
+      <div class="alert alert-danger"
+        style="margin-bottom: 15px; padding: 10px; border-radius: 5px; background-color: #f8d7da; color: #721c24;">
+        <?= $error ?>
+      </div>
     <?php endif; ?>
-    <form class="checkout-form" method="post">
-      <div class="form-group">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" required />
+    <form class="checkout-form" method="post" style="display: flex; flex-direction: column; gap: 15px;">
+      <div class="form-group" style="display: flex; flex-direction: column;">
+        <label for="name" style="margin-bottom: 5px; font-weight: bold;">Full Name</label>
+        <input type="text" id="name" name="name" required
+          style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;" />
       </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required />
+      <div class="form-group" style="display: flex; flex-direction: column;">
+        <label for="phone" style="margin-bottom: 5px; font-weight: bold;">Phone Number</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required placeholder="Enter 10-digit phone number"
+          style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;" />
       </div>
-      <div class="form-group">
-        <label for="address">Address</label>
-        <input type="text" id="address" name="address" required />
+      <div class="form-group" style="display: flex; flex-direction: column;">
+        <label for="address" style="margin-bottom: 5px; font-weight: bold;">Address</label>
+        <input type="text" id="address" name="address" required
+          style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;" />
       </div>
-      <div class="form-group">
-        <label for="wilaya">Wilaya</label>
-        <select id="wilaya" name="wilaya" required>
+      <div class="form-group" style="display: flex; flex-direction: column;">
+        <label for="wilaya" style="margin-bottom: 5px; font-weight: bold;">Wilaya</label>
+        <select id="wilaya" name="wilaya" required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
           <option value="">Choose your Wilaya</option>
           <option value="Adrar">Adrar</option>
           <option value="Chlef">Chlef</option>
@@ -142,8 +148,10 @@ include __DIR__ . '/../includes/header.php';
           <option value="Relizane">Relizane</option>
         </select>
       </div>
-      <hr />
-      <button type="submit" class="checkout-btn">Place Order as Guest</button>
+      <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ccc;" />
+      <button type="submit" class="checkout-btn"
+        style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">Place
+        Order as Guest</button>
     </form>
   </div>
 </div>

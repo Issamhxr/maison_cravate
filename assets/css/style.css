@@ -43,6 +43,9 @@ html,
 body {
   height: 100%;
   overflow-x: hidden;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 body {
@@ -52,6 +55,10 @@ body {
   line-height: 1.6;
   background-color: var(--clr-bg);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  margin: 0;
 }
 
 /* Main background with professional design */
@@ -234,21 +241,7 @@ img {
   margin-top: -76px;
 }
 
-.jumbotron .hero-card {
-  background: rgba(34, 40, 60, 0.45);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 2rem;
-  border: 1.5px solid rgba(255, 255, 255, 0.18);
-  padding: 3.5rem 2.5rem 3rem;
-  max-width: 600px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: heroFadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
+
 
 @keyframes heroFadeIn {
   from {
@@ -268,7 +261,7 @@ img {
   font-weight: 900;
   margin-bottom: 1.2rem;
   color: #232323;
-  text-shadow: 0 6px 32px rgba(42, 47, 69, 0.15), 0 2px 8px #fff, 0 1px 0 #fff;
+  text-shadow: 0 6px 32px rgba(45, 7, 6, 0.415), 0 2px 8px #fff, 0 1px 0 #fff;
   letter-spacing: -1.5px;
   line-height: 1.1;
   text-transform: uppercase;
@@ -454,7 +447,7 @@ img {
 }
 
 .card-img-top {
-  height: 250px;
+  height: 300px; /* Increased height for taller images */
   object-fit: cover;
   transition: transform var(--transition);
 }
@@ -556,6 +549,9 @@ footer {
   text-align: center;
   position: relative;
   overflow: hidden;
+  margin-top: auto;
+  bottom: 0;
+  width: 100%;
 }
 
 footer::before {
@@ -740,6 +736,11 @@ footer a:hover::after {
   .checkout-btn {
     font-size: 0.9rem;
   }
+
+  .products .col-md-3 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
 }
 
 /*--------------------------------------------------------------
@@ -761,6 +762,7 @@ footer a:hover::after {
 --------------------------------------------------------------*/
 html {
   scroll-behavior: smooth;
+  height: 100%;
 }
 
 /*--------------------------------------------------------------
@@ -926,4 +928,59 @@ checkout-desc {
     padding: 0.75rem 0;
     font-size: 1rem;
   }
+}
+
+/* Responsive adjustments for product list */
+@media (max-width: 576px) {
+  .row.products .col-md-3 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 576px) {
+  .products .col-md-3 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+/* Sticky footer layout */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content to the top */
+  flex-grow: 1;
+}
+
+/* Adjust spacing for product pages */
+.container {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure footer is always visible */
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+ 
+  text-align: center;
+
+  background-color: #f8f9fa;
 }
